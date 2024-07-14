@@ -15,10 +15,11 @@ graphics.off()
 ##
 ################################################################################
 
-mainplot_levels <- c("A1", "A2", "A3", "A4")
-subplot_levels <- c("B1", "B2", "B3")
-block_no <- 5 # 5 blocks o repeticiones
+mainplot_levels <- c("A1", "A2", "A3", "A4") # tratamientos
+subplot_levels <- c("B1", "B2", "B3") # subtratamientos
+block_no <- 5 # blocks o repeticiones
 
+# Cuenta número de tratamientos
 main_no <- n_distinct(mainplot_levels)
 
 # Creando el diseño
@@ -27,9 +28,8 @@ outdesign <- design.split(mainplot_levels, subplot_levels, r= block_no,
                           seed=45,
                           kinds ="Super-Duper") # método para randomizar
 
-
-field_book <- outdesign$book # creando "libro de campo" con el diseño del exper.
-
+# creando "libro de campo" con el diseño del exper.
+field_book <- outdesign$book 
 
 
 # Escribir libro de campo en archivo de texto
@@ -47,8 +47,6 @@ viridis(main_no)
 # Convirtiendo todas las variables del data frame a factor
 col_names <- c('plots', 'subplot_levels')
 
-# field_book <- field_book %>%
-#   mutate(across(col_names, as.factor))
 
 field_book[, col_names] <- lapply(field_book[, col_names], factor)
 
